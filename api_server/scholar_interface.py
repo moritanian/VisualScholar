@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, random
 
 from time import sleep
 
@@ -46,7 +46,8 @@ class ScholarInterface():
             articles.extend( self.querier.articles )
             print("start= " + str(i * query.num_results ))
             print("num_articles= " + str(len( self.querier.articles )))
-            sleep(1.5)
+            sleep_time =  random.randrange(20)/10.0 + 1.0
+            sleep(sleep_time)
 
         print("num_articles= " + str(len(articles)))
         

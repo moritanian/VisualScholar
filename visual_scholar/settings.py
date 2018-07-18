@@ -40,11 +40,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters', 
     'api_server',
+    'gunicorn',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,6 +127,11 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_URL = '/var/www/static'
+#STATIC_ROOT = '/var/www/static'
+STATIC_ROOT = './static/'
+
+CORS_ORIGIN_ALLOW_ALL=True
 
 #REST_FRAMEWORK = {
 #    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
