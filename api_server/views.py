@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from .models import Article
 from .models import Citation
+from .models import ArticleStatus
 
 from rest_framework import viewsets, filters
 from .serializer import ArticleSerializer, CitationSerializer
 from rest_framework.response import Response
+
+from .scholar_interface import ScholarInterface
 
 class ArticleViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Article.objects.all()
@@ -42,7 +45,14 @@ class CitationViewSet(viewsets.ReadOnlyModelViewSet):
             if citing is not None:
                 filterd = CitationViewSet.queryset.filter(citing=citing)
             else:
-                filterd = CitationViewSet.queryset    
+                filterd = CitationViewSet.queryset   
+
+        cited_status = ArticleStatus.objects.get(article=cited)
+        if filterd.count() == 0 and cited_status.citations_expansion == False:
+            print(' get scholar!!!!!')
+            ret = ScholarInterface().expandByArticle( cited_status.article )
+            print('finished!!!')
+            print(ret)
         
         serializer =  CitationViewSet.serializer_class(filterd ,many=True)
 
