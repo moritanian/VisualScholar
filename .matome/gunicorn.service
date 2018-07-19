@@ -1,0 +1,11 @@
+[Unit]
+Description=gunicorn
+After=network.target
+ 
+[Service]
+WorkingDirectory=/home/dbclass
+ExecStart=gunicorn --bind 127.0.0.1:8000 testdjango.wsgi:application
+ 
+[Install]
+WantedBy=multi-user.target
+

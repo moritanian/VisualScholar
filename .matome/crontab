@@ -1,0 +1,1 @@
+* * * * * /home/dbclass/.pyenv/versions/3.6.0/bin/python /home/dbclass/manage.py test_job >>/tmp/cron.log 2>>/tmp/cron_error.log
